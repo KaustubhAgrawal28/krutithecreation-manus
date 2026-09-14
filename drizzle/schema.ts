@@ -26,6 +26,8 @@ export const orders = mysqlTable("orders", {
   shipping: int("shipping").notNull(),
   total: int("total").notNull(),
   paymentMethod: mysqlEnum("paymentMethod", ["upi", "whatsapp"]).notNull(),
+  policyVersion: varchar("policyVersion", { length: 32 }).notNull().default("2026-09-14"),
+  termsAcceptedAt: timestamp("termsAcceptedAt").notNull(),
   status: mysqlEnum("status", ["new", "confirmed", "fulfilled", "cancelled"]).default("new").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });

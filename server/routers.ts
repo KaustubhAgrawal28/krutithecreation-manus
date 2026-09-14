@@ -31,6 +31,7 @@ export const appRouter = router({
         pinCode: z.string().regex(/^\d{6}$/, "Enter a valid 6-digit pin code"),
         notes: z.string().trim().max(800).optional(),
         paymentMethod: z.enum(["upi", "whatsapp"]),
+        termsAccepted: z.literal(true),
         items: z.array(orderItemSchema).min(1).max(30),
       }))
       .mutation(async ({ input }) => {
@@ -55,6 +56,8 @@ export const appRouter = router({
           shipping: quote.shipping,
           total: quote.total,
           paymentMethod: input.paymentMethod,
+          policyVersion: "2026-09-14",
+          termsAcceptedAt: new Date(),
           status: "new",
         });
         await sendOrderConfirmationEmail({ orderNumber, customerName: input.customerName, customerEmail: input.email, items: normalizedItems, quote, paymentMethod: input.paymentMethod });

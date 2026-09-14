@@ -23,7 +23,6 @@ export const catalogue: CatalogueProduct[] = [
     description: "A soft, sculptural statement piece for quiet corners.",
     details: "Hand-knotted in natural cotton with a warm beechwood dowel. Approx. 52 × 74 cm.",
     image: "/manus-storage/knot-and-nest-wall-hanging_d8e85dcf.jpg",
-    badge: "Studio favourite",
     featured: true,
   },
   {
@@ -35,7 +34,6 @@ export const catalogue: CatalogueProduct[] = [
     description: "Let your favourite trailing plant take the spotlight.",
     details: "Sized for a 6–8 inch pot. Plant pot not included. Natural cotton rope and beech ring.",
     image: "/manus-storage/knot-and-nest-plant-hanger_5572b625.jpg",
-    badge: "Low stock",
     featured: true,
   },
   {
@@ -47,7 +45,6 @@ export const catalogue: CatalogueProduct[] = [
     description: "A small daily detail, finished with a pop of terracotta.",
     details: "Braided cotton cord with brass ring. Approx. 12 cm including tassel.",
     image: "/manus-storage/knot-and-nest-keychain_ada1e2ac.jpg",
-    badge: "Gift-ready",
     featured: true,
   },
   {
@@ -59,7 +56,6 @@ export const catalogue: CatalogueProduct[] = [
     description: "A cheerful little arch for nurseries, shelves and sunny days.",
     details: "Hand-wrapped cotton cord in sage, butter, blush and oat. Approx. 18 × 15 cm.",
     image: "/manus-storage/knot-and-nest-rainbow_2baf4ad7.jpg",
-    badge: "New",
     featured: true,
   },
 ];
