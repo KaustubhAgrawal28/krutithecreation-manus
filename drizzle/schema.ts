@@ -1,9 +1,5 @@
 import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
-/**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- */
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
@@ -23,8 +19,11 @@ export const orders = mysqlTable("orders", {
   email: varchar("email", { length: 320 }).notNull(),
   phone: varchar("phone", { length: 40 }).notNull(),
   address: text("address").notNull(),
+  pinCode: varchar("pinCode", { length: 6 }).notNull(),
   notes: text("notes"),
   items: text("items").notNull(),
+  subtotal: int("subtotal").notNull(),
+  shipping: int("shipping").notNull(),
   total: int("total").notNull(),
   paymentMethod: mysqlEnum("paymentMethod", ["upi", "whatsapp"]).notNull(),
   status: mysqlEnum("status", ["new", "confirmed", "fulfilled", "cancelled"]).default("new").notNull(),

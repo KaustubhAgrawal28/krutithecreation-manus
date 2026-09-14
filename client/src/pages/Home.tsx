@@ -26,6 +26,7 @@ import {
   type CatalogueProduct,
   type ProductCategory,
 } from "@shared/catalogue";
+import { formatShipping, getShippingQuote } from "@shared/shipping";
 
 type CartItem = { productId: string; quantity: number };
 type PaymentMethod = "upi" | "whatsapp";
@@ -35,6 +36,7 @@ type CheckoutForm = {
   email: string;
   phone: string;
   address: string;
+  pinCode: string;
   notes: string;
   paymentMethod: PaymentMethod;
 };
@@ -44,6 +46,7 @@ const emptyForm: CheckoutForm = {
   email: "",
   phone: "",
   address: "",
+  pinCode: "",
   notes: "",
   paymentMethod: "upi",
 };
@@ -81,6 +84,7 @@ export default function Home() {
   );
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = cartLines.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const shippingQuote = getShippingQuote(form.pinCode, cartTotal);
   const createOrder = trpc.orders.create.useMutation({
     onSuccess: (result) => {
       setConfirmation(result);
@@ -278,7 +282,7 @@ export default function Home() {
         <footer className="bg-[#e7d8c6] px-5 py-12 lg:px-10">
           <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-9 sm:flex-row sm:items-end">
             <div><div className="font-serif text-[25px] tracking-[-0.05em]">Knot &amp; Nest</div><p className="mt-2 text-[11px] uppercase tracking-[0.17em] text-[#83776b]">Handmade macramé for soft spaces</p></div>
-            <div className="flex items-center gap-5"><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} /></a></div>
+            <div className="flex items-center gap-5"><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="https://www.instagram.com/krutithecreation/" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} /></a></div>
           </div>
         </footer>
       </main>
@@ -297,10 +301,10 @@ export default function Home() {
           <div className="flex items-start justify-between border-b border-[#2c2b28]/10 px-6 py-6 sm:px-9"><div><p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a45e42]">Almost yours</p><h2 id="checkout-title" className="mt-1 font-serif text-3xl tracking-[-0.05em]">Place your order</h2></div><button type="button" onClick={() => setCheckoutOpen(false)} className="rounded-full p-2 hover:bg-[#eadfd2]" aria-label="Close checkout"><X size={22} /></button></div>
           <form onSubmit={submitOrder} className="space-y-6 px-6 py-6 sm:px-9 sm:py-8">
             <div className="grid gap-5 sm:grid-cols-2"><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Your name<input required value={form.customerName} onChange={(event) => setForm({ ...form, customerName: event.target.value })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="Aarav Sharma" /></label><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Email address<input required type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="you@example.com" /></label></div>
-            <div className="grid gap-5 sm:grid-cols-2"><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Phone / WhatsApp<input required type="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="+91 98765 43210" /></label><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Delivery address + pin code<input required value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="Full address + pin code" /></label></div>
+            <div className="grid gap-5 sm:grid-cols-2"><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Phone / WhatsApp<input required type="tel" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="+91 98765 43210" /></label><label className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">6-digit pin code<input required inputMode="numeric" pattern="[0-9]{6}" value={form.pinCode} onChange={(event) => setForm({ ...form, pinCode: event.target.value.replace(/\D/g, "").slice(0, 6) })} className="mt-2 h-12 w-full rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="560001" /></label></div><label className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">Delivery address<textarea required value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} className="mt-2 min-h-20 w-full resize-y rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 py-3 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="Flat, street, city" /></label>
             <label className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">A note for the studio <span className="font-normal normal-case tracking-normal text-[#a39a8f]">(optional)</span><textarea value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} className="mt-2 min-h-24 w-full resize-y rounded-xl border border-[#2c2b28]/15 bg-transparent px-4 py-3 text-sm font-normal normal-case tracking-normal outline-none transition-colors focus:border-[#a45e42]" placeholder="Gift note, colour preference, anything we should know..." /></label>
             <fieldset><legend className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#756c62]">How would you like to pay?</legend><div className="mt-3 grid gap-3 sm:grid-cols-2"><label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${form.paymentMethod === "upi" ? "border-[#a45e42] bg-[#f1e5d9]" : "border-[#2c2b28]/15"}`}><input type="radio" name="paymentMethod" value="upi" checked={form.paymentMethod === "upi"} onChange={() => setForm({ ...form, paymentMethod: "upi" })} className="mt-1 accent-[#a45e42]" /><span><span className="block text-sm font-semibold">UPI / QR</span><span className="mt-1 block text-xs leading-5 text-[#847a70]">We’ll share payment details after confirming your order.</span></span></label><label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${form.paymentMethod === "whatsapp" ? "border-[#a45e42] bg-[#f1e5d9]" : "border-[#2c2b28]/15"}`}><input type="radio" name="paymentMethod" value="whatsapp" checked={form.paymentMethod === "whatsapp"} onChange={() => setForm({ ...form, paymentMethod: "whatsapp" })} className="mt-1 accent-[#a45e42]" /><span><span className="block text-sm font-semibold">WhatsApp handoff</span><span className="mt-1 block text-xs leading-5 text-[#847a70]">Place your order, then we’ll coordinate payment there.</span></span></label></div></fieldset>
-            <div className="flex items-center justify-between border-t border-[#2c2b28]/10 pt-5"><div><span className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-[#8c8176]">Order total</span><span className="font-serif text-3xl tracking-[-0.05em]">{formatPrice(cartTotal)}</span></div><button type="submit" disabled={createOrder.isPending} className="flex h-12 items-center justify-center rounded-full bg-[#2c2b28] px-6 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#f7f3ed] transition-all hover:bg-[#a45e42] disabled:cursor-wait disabled:opacity-60 active:scale-[0.98]">{createOrder.isPending ? "Sending..." : "Place order"}<ArrowUpRight size={16} className="ml-2" /></button></div>
+            <div className="border-t border-[#2c2b28]/10 pt-5"><div className="mb-4 space-y-2 text-sm"><div className="flex justify-between text-[#81776c]"><span>Subtotal</span><span>{formatPrice(cartTotal)}</span></div><div className="flex justify-between text-[#81776c]"><span>Delivery</span><span>{form.pinCode.length === 6 ? formatShipping(shippingQuote.shipping) : "Enter pin code"}</span></div><div className="flex justify-between pt-1 text-base font-semibold text-[#2c2b28]"><span>Order total</span><span className="font-serif text-2xl">{formatPrice(form.pinCode.length === 6 ? shippingQuote.total : cartTotal)}</span></div></div><div className="flex items-center justify-end"><button type="submit" disabled={createOrder.isPending} className="flex h-12 items-center justify-center rounded-full bg-[#2c2b28] px-6 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#f7f3ed] transition-all hover:bg-[#a45e42] disabled:cursor-wait disabled:opacity-60 active:scale-[0.98]">{createOrder.isPending ? "Sending..." : "Place order"}<ArrowUpRight size={16} className="ml-2" /></button></div></div>
           </form>
         </div>
       </div>}
