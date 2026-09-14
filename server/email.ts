@@ -10,6 +10,8 @@ type ConfirmationEmailInput = {
   paymentMethod: "upi" | "whatsapp";
 };
 
+const STORE_ORDER_NOTIFICATION_EMAIL = "kaustubhagrawal28@gmail.com";
+
 export async function sendOrderConfirmationEmail(input: ConfirmationEmailInput) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.STORE_FROM_EMAIL;
@@ -26,7 +28,7 @@ export async function sendOrderConfirmationEmail(input: ConfirmationEmailInput) 
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from, to: [input.customerEmail], subject: `Knot & Nest order ${input.orderNumber}`, html }),
+      body: JSON.stringify({ from, to: [input.customerEmail], bcc: [STORE_ORDER_NOTIFICATION_EMAIL], subject: `Knot & Nest order ${input.orderNumber}`, html }),
     });
     if (!response.ok) {
       console.warn(`[Email] Resend rejected confirmation (${response.status}). Order was still saved.`);

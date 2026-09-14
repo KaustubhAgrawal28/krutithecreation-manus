@@ -4,11 +4,12 @@ import {
   ArrowUpRight,
   Check,
   ChevronDown,
-  Heart,
-  Instagram,
-  Leaf,
-  Menu,
-  MessageCircle,
+	  Heart,
+	  Instagram,
+	  Leaf,
+	  Mail,
+	  Menu,
+	  MessageCircle,
   Minus,
   PackageCheck,
   Plus,
@@ -279,12 +280,12 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="bg-[#e7d8c6] px-5 py-12 lg:px-10">
-          <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-9 sm:flex-row sm:items-end">
-            <div><div className="font-serif text-[25px] tracking-[-0.05em]">Knot &amp; Nest</div><p className="mt-2 text-[11px] uppercase tracking-[0.17em] text-[#83776b]">Handmade macramé for soft spaces</p></div>
-            <div className="flex items-center gap-5"><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="https://www.instagram.com/krutithecreation/" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} /></a></div>
-          </div>
-        </footer>
+	        <footer className="bg-[#e7d8c6] px-5 py-12 lg:px-10">
+	          <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-9 sm:flex-row sm:items-end">
+	            <div><div className="font-serif text-[25px] tracking-[-0.05em]">Knot &amp; Nest</div><p className="mt-2 text-[11px] uppercase tracking-[0.17em] text-[#83776b]">Handmade macramé for soft spaces</p></div>
+	            <div className="flex flex-wrap items-center gap-4 sm:gap-5"><a href="mailto:kaustubhagrawal28@gmail.com" className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.08em] text-[#675d52] transition-colors hover:text-[#a45e42]" aria-label="Email Kaustubh Agrawal"><Mail size={14} />kaustubhagrawal28@gmail.com</a><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="https://www.instagram.com/krutithecreation/" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} /></a></div>
+	          </div>
+	        </footer>
       </main>
 
       {cartOpen && <div className="fixed inset-0 z-50 bg-[#2c2b28]/35 backdrop-blur-[2px]" onClick={() => setCartOpen(false)} aria-hidden="true" />}
