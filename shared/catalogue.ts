@@ -58,6 +58,17 @@ export const catalogue: CatalogueProduct[] = [
     image: "/manus-storage/knot-and-nest-rainbow_2baf4ad7.jpg",
     featured: true,
   },
+  {
+    id: "owl-wall-hanging",
+    name: "Owl Wall Hanging",
+    shortName: "Owl",
+    category: "wall-art",
+    price: 400,
+    description: "A playful hand-knotted owl for cheerful corners.",
+    details: "Handmade cotton macramé with wooden dowel and soft fringe.",
+    image: "/manus-storage/IMG-20251005-WA0003_1a9fb7be.jpg",
+    featured: true,
+  },
 ];
 
 export const categoryLabels: Record<ProductCategory | "all", string> = {
