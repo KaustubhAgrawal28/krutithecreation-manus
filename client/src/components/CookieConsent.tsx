@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-const CONSENT_KEY = "knot-and-nest-cookie-consent";
+const CONSENT_KEY = "kriti-the-creation-cookie-consent";
 const ANALYTICS_SRC = import.meta.env.VITE_ANALYTICS_ENDPOINT ? `${import.meta.env.VITE_ANALYTICS_ENDPOINT}/umami` : "";
 const ANALYTICS_WEBSITE_ID = import.meta.env.VITE_ANALYTICS_WEBSITE_ID || "";
 
 type ConsentChoice = "accepted" | "declined";
 
 function loadAnalytics() {
-  if (!ANALYTICS_SRC || !ANALYTICS_WEBSITE_ID || document.querySelector("script[data-knot-nest-analytics]") ) return;
+  if (!ANALYTICS_SRC || !ANALYTICS_WEBSITE_ID || document.querySelector("script[data-kriti-the-creation-analytics]") ) return;
   const script = document.createElement("script");
   script.defer = true;
   script.src = ANALYTICS_SRC;

@@ -60,7 +60,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<"all" | ProductCategory>("all");
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem("knot-and-nest-cart") || "[]") as CartItem[];
+      return JSON.parse(localStorage.getItem("kriti-the-creation-cart") || "[]") as CartItem[];
     } catch {
       return [];
     }
@@ -73,7 +73,7 @@ export default function Home() {
   const [confirmation, setConfirmation] = useState<{ orderNumber: string; total: number; paymentMethod: PaymentMethod } | null>(null);
 
   useEffect(() => {
-    localStorage.setItem("knot-and-nest-cart", JSON.stringify(cart));
+    localStorage.setItem("kriti-the-creation-cart", JSON.stringify(cart));
   }, [cart]);
 
   const filteredProducts = useMemo(
@@ -147,12 +147,12 @@ export default function Home() {
 
       <header className="relative z-30 border-b border-[#2c2b28]/10 bg-[#f7f3ed]/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[1320px] items-center justify-between px-5 py-5 lg:px-10">
-          <a href="#top" className="group flex items-center gap-3" aria-label="Knot & Nest home">
+          <a href="#top" className="group flex items-center gap-3" aria-label="कृति The Creation home">
             <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2c2b28]/20 bg-[#e8d8c4] text-[#9b5c3f] transition-transform duration-200 group-hover:rotate-6">
               <Leaf size={19} strokeWidth={1.7} />
             </span>
             <span className="leading-none">
-              <span className="block font-serif text-[21px] tracking-[-0.04em]">Knot &amp; Nest</span>
+              <span className="block font-serif text-[21px] tracking-[-0.04em]">कृति The Creation</span>
               <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.3em] text-[#7c756d]">Macramé studio</span>
             </span>
           </a>
@@ -268,7 +268,7 @@ export default function Home() {
           <div className="flex flex-col justify-center">
             <div className="mb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#a45e42]">The knot behind it</div>
             <h2 className="max-w-[580px] font-serif text-[clamp(2.75rem,5vw,5rem)] leading-[0.92] tracking-[-0.07em]">Objects with a little more <em className="text-[#a45e42]">meaning.</em></h2>
-            <p className="mt-8 max-w-[500px] text-[15px] leading-7 text-[#706960]">Knot &amp; Nest began at a dining table, with a coil of cotton cord and a belief that the things we live with should feel good to hold, look good to keep and take their time to make.</p>
+            <p className="mt-8 max-w-[500px] text-[15px] leading-7 text-[#706960]">कृति The Creation began at a dining table, with a coil of cotton cord and a belief that the things we live with should feel good to hold, look good to keep and take their time to make.</p>
             <p className="mt-5 max-w-[500px] text-[15px] leading-7 text-[#706960]">Each piece is knotted by hand, one at a time, so small variations are part of its story — not a flaw to hide.</p>
             <div className="mt-10 grid max-w-[480px] grid-cols-2 gap-8 border-t border-[#2c2b28]/15 pt-6">
               <div><p className="font-serif text-3xl tracking-[-0.05em]">01</p><p className="mt-2 text-[10px] font-semibold uppercase leading-4 tracking-[0.15em] text-[#80776c]">Hands behind every knot</p></div>
@@ -288,8 +288,8 @@ export default function Home() {
 
 	        <footer className="bg-[#e7d8c6] px-5 py-12 lg:px-10">
                   <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-9 sm:flex-row sm:items-end">
-                    <div><div className="font-serif text-[25px] tracking-[-0.05em]">Knot &amp; Nest</div><p className="mt-2 text-[11px] uppercase tracking-[0.17em] text-[#625a50]">Handmade macramé for soft spaces</p><p className="mt-3 max-w-[340px] text-xs leading-5 text-[#675d52]">Business contact: <a href="mailto:kaustubhagrawal28@gmail.com" className="underline underline-offset-2">kaustubhagrawal28@gmail.com</a>. Legal seller and grievance details will be published before launch.</p></div>
-                    <div className="flex flex-wrap items-center gap-4 sm:gap-5"><a href="mailto:kaustubhagrawal28@gmail.com" className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.08em] text-[#675d52] transition-colors hover:text-[#a45e42]" aria-label="Email Knot and Nest"><Mail size={14} aria-hidden="true" />Email us</a><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="/privacy" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Privacy</a><a href="/terms" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Terms</a><a href="/cookies" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Cookies</a><a href="/refunds" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Refunds</a><a href="https://www.instagram.com/krutithecreation/" target="_blank" rel="noreferrer" aria-label="Open Knot and Nest on Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} aria-hidden="true" /></a></div>
+                    <div><div className="font-serif text-[25px] tracking-[-0.05em]">कृति The Creation</div><p className="mt-2 text-[11px] uppercase tracking-[0.17em] text-[#625a50]">Handmade macramé for soft spaces</p><p className="mt-3 max-w-[340px] text-xs leading-5 text-[#675d52]">Business contact: <a href="mailto:krutithecreation1@gmail.com" className="underline underline-offset-2">krutithecreation1@gmail.com</a>. Legal seller and grievance details will be published before launch.</p></div>
+                    <div className="flex flex-wrap items-center gap-4 sm:gap-5"><a href="mailto:krutithecreation1@gmail.com" className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.08em] text-[#675d52] transition-colors hover:text-[#a45e42]" aria-label="Email कृति The Creation"><Mail size={14} aria-hidden="true" />Email us</a><a href="#top" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Back to top</a><a href="/privacy" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Privacy</a><a href="/terms" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Terms</a><a href="/cookies" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Cookies</a><a href="/refunds" className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#675d52]">Refunds</a><a href="https://www.instagram.com/krutithecreation/" target="_blank" rel="noreferrer" aria-label="Open कृति The Creation on Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[#675d52] transition-colors hover:bg-[#f7f3ed]"><Instagram size={16} aria-hidden="true" /></a></div>
 	          </div>
 	        </footer>
       </main>
@@ -316,7 +316,7 @@ export default function Home() {
         </div>
       </div>}
 
-      {confirmation && <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#2c2b28]/50 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="success-title"><div className="w-full max-w-[520px] rounded-[2rem] bg-[#f7f3ed] p-7 text-center shadow-2xl sm:p-10"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d8e0d2] text-[#5f775c]"><Check size={29} /></div><p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a45e42]">Order received</p><h2 id="success-title" className="mt-2 font-serif text-4xl tracking-[-0.06em]">Thank you, {form.customerName || "friend"}.</h2><p className="mx-auto mt-4 max-w-[370px] text-sm leading-6 text-[#756c62]">Your order <strong className="text-[#2c2b28]">{confirmation.orderNumber}</strong> has landed safely. We’ll confirm the details and payment steps shortly.</p><div className="mt-7 rounded-2xl bg-[#eee5db] p-4 text-left"><div className="flex justify-between text-sm"><span className="text-[#81776c]">Total</span><strong>{formatPrice(confirmation.total)}</strong></div><div className="mt-2 flex justify-between text-sm"><span className="text-[#81776c]">Payment</span><strong>{confirmation.paymentMethod === "upi" ? "UPI / QR" : "WhatsApp"}</strong></div></div><div className="mt-7 flex flex-col gap-3 sm:flex-row"><a href={`https://wa.me/?text=${encodeURIComponent(`Hello Knot & Nest, I just placed order ${confirmation.orderNumber} for ${formatPrice(confirmation.total)}.`)}`} target="_blank" rel="noreferrer" className="flex h-11 flex-1 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-[#eadfd2]"><MessageCircle size={16} className="mr-2" /> Open WhatsApp</a><button type="button" onClick={() => setConfirmation(null)} className="h-11 flex-1 rounded-full bg-[#2c2b28] text-[10px] font-semibold uppercase tracking-[0.16em] text-[#f7f3ed] transition-colors hover:bg-[#a45e42]">Keep browsing</button></div></div></div>}
+      {confirmation && <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#2c2b28]/50 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="success-title"><div className="w-full max-w-[520px] rounded-[2rem] bg-[#f7f3ed] p-7 text-center shadow-2xl sm:p-10"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d8e0d2] text-[#5f775c]"><Check size={29} /></div><p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a45e42]">Order received</p><h2 id="success-title" className="mt-2 font-serif text-4xl tracking-[-0.06em]">Thank you, {form.customerName || "friend"}.</h2><p className="mx-auto mt-4 max-w-[370px] text-sm leading-6 text-[#756c62]">Your order <strong className="text-[#2c2b28]">{confirmation.orderNumber}</strong> has landed safely. We’ll confirm the details and payment steps shortly.</p><div className="mt-7 rounded-2xl bg-[#eee5db] p-4 text-left"><div className="flex justify-between text-sm"><span className="text-[#81776c]">Total</span><strong>{formatPrice(confirmation.total)}</strong></div><div className="mt-2 flex justify-between text-sm"><span className="text-[#81776c]">Payment</span><strong>{confirmation.paymentMethod === "upi" ? "UPI / QR" : "WhatsApp"}</strong></div></div><div className="mt-7 flex flex-col gap-3 sm:flex-row"><a href={`https://wa.me/?text=${encodeURIComponent(`Hello कृति The Creation, I just placed order ${confirmation.orderNumber} for ${formatPrice(confirmation.total)}.`)}`} target="_blank" rel="noreferrer" className="flex h-11 flex-1 items-center justify-center rounded-full border border-[#2c2b28]/20 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-[#eadfd2]"><MessageCircle size={16} className="mr-2" /> Open WhatsApp</a><button type="button" onClick={() => setConfirmation(null)} className="h-11 flex-1 rounded-full bg-[#2c2b28] text-[10px] font-semibold uppercase tracking-[0.16em] text-[#f7f3ed] transition-colors hover:bg-[#a45e42]">Keep browsing</button></div></div></div>}
     </div>
   );
 }

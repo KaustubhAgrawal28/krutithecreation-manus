@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  font-family: "DM Sans", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
   color: #2c2b28;
   background: #f7f3ed;
   font-synthesis: none;
@@ -34,7 +34,7 @@ html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; background: #f7f3ed; }
 button, a, input, textarea { font: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #a45e42; outline-offset: 3px; }
-.font-serif { font-family: "Playfair Display", Georgia, serif; }
+.font-serif { font-family: "Playfair Display", "Noto Sans Devanagari", Georgia, serif; }
 
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }

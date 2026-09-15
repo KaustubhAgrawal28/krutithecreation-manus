@@ -4,14 +4,14 @@ import { Link } from "wouter";
 type LegalPageKind = "privacy" | "terms" | "cookies" | "refunds";
 
 const LAST_UPDATED = "14 September 2026";
-const CONTACT_EMAIL = "kaustubhagrawal28@gmail.com";
+const CONTACT_EMAIL = "krutithecreation1@gmail.com";
 
 function PolicyShell({ title, eyebrow, children }: { title: string; eyebrow: string; children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#f7f3ed] text-[#2c2b28]">
       <header className="border-b border-[#2c2b28]/10 bg-[#f7f3ed]/95 px-5 py-5 backdrop-blur-sm lg:px-10">
         <div className="mx-auto flex max-w-[980px] items-center justify-between gap-4">
-          <Link href="/" className="font-serif text-2xl tracking-[-0.05em]" aria-label="Knot & Nest home">Knot &amp; Nest</Link>
+          <Link href="/" className="font-serif text-2xl tracking-[-0.05em]" aria-label="कृति The Creation home">कृति The Creation</Link>
           <Link href="/" className="rounded-full border border-[#2c2b28]/20 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-[#eadfd2]">Back to shop</Link>
         </div>
       </header>
@@ -23,7 +23,7 @@ function PolicyShell({ title, eyebrow, children }: { title: string; eyebrow: str
           {children}
         </article>
         <div className="mt-14 rounded-2xl border border-[#a45e42]/30 bg-[#f1e5d9] p-5 text-sm leading-6 text-[#5f584f]">
-          <strong className="text-[#2c2b28]">Seller details still needed before launch.</strong> The site currently identifies the business as Knot &amp; Nest and provides {CONTACT_EMAIL}. Add the owner’s legal name, full correspondence address, customer-care contact, grievance-officer name and contact, and GSTIN if applicable before accepting orders at scale. Do not treat this page as legal advice.
+          <strong className="text-[#2c2b28]">Seller details still needed before launch.</strong> The site currently identifies the business as कृति The Creation and provides {CONTACT_EMAIL}. Add the owner’s legal name, full correspondence address, customer-care contact, grievance-officer name and contact, and GSTIN if applicable before accepting orders at scale. Do not treat this page as legal advice.
         </div>
       </main>
     </div>
@@ -33,7 +33,7 @@ function PolicyShell({ title, eyebrow, children }: { title: string; eyebrow: str
 function PrivacyPolicy() {
   return (
     <PolicyShell title="Privacy, plainly put." eyebrow="Privacy policy">
-      <p>This policy explains how Knot &amp; Nest handles information when you browse the shop or place an order. It is written for the current site implementation and should be reviewed by the business owner for the places where a legal name, address, retention schedule, and grievance contact are still missing.</p>
+      <p>This policy explains how कृति The Creation handles information when you browse the shop or place an order. It is written for the current site implementation and should be reviewed by the business owner for the places where a legal name, address, retention schedule, and grievance contact are still missing.</p>
       <h2>Information we collect</h2>
       <p>To process an order, the checkout asks for your name, email address, phone or WhatsApp number, delivery address, PIN code, selected items, payment preference, and any optional order note. The cart is stored in your browser so that your selection survives a page refresh. We do not ask for an account, password, date of birth, government ID, or marketing profile.</p>
       <h2>Why we use it</h2>
@@ -55,17 +55,17 @@ function PrivacyPolicy() {
 function Terms() {
   return (
     <PolicyShell title="The simple terms." eyebrow="Terms & conditions">
-      <p>These terms apply to browsing and ordering from Knot &amp; Nest. They are intended as an India-focused baseline and must be completed with the seller’s legal identity, address, grievance contact, and final governing-law details before launch.</p>
+      <p>These terms apply to browsing and ordering from कृति The Creation. They are intended as an India-focused baseline and must be completed with the seller’s legal identity, address, grievance contact, and final governing-law details before launch.</p>
       <h2>Products and orders</h2>
-      <p>Product descriptions, dimensions, materials, prices, and availability are shown on the product page. Handmade pieces can have small variations. An order request is not accepted until Knot &amp; Nest confirms it. If an item or price cannot be honoured, we will contact you and refund any amount already received for that item.</p>
+      <p>Product descriptions, dimensions, materials, prices, and availability are shown on the product page. Handmade pieces can have small variations. An order request is not accepted until कृति The Creation confirms it. If an item or price cannot be honoured, we will contact you and refund any amount already received for that item.</p>
       <h2>Prices, delivery, and payment</h2>
       <p>Prices are shown in Indian rupees. Delivery is calculated from the PIN code and the cart value and is shown before submission when a valid PIN code is entered. Payment is arranged after the order request through the selected UPI or WhatsApp handoff. Do not send card numbers, banking passwords, or one-time passwords through the order note or WhatsApp.</p>
       <h2>Customer responsibilities</h2>
       <p>Provide accurate contact and delivery information and tell us promptly if anything changes. You are responsible for checking that the delivery address and phone number are correct. You must not misuse the site, attempt unauthorised access, or submit another person’s information without permission.</p>
       <h2>Intellectual property</h2>
-      <p>Site text, branding, layout, and original product photography belong to Knot &amp; Nest or their respective licensors. You may view the site for personal shopping purposes. Do not copy, sell, or reuse site assets without permission. The owner should keep source records or licences for every image used.</p>
+      <p>Site text, branding, layout, and original product photography belong to कृति The Creation or their respective licensors. You may view the site for personal shopping purposes. Do not copy, sell, or reuse site assets without permission. The owner should keep source records or licences for every image used.</p>
       <h2>Liability and lawful rights</h2>
-      <p>Nothing in these terms removes rights that cannot lawfully be excluded. Subject to applicable law, Knot &amp; Nest is not responsible for losses caused by incorrect customer information, third-party service outages, or events outside reasonable control. Product-specific remedies and cancellations are described in the Refund policy.</p>
+      <p>Nothing in these terms removes rights that cannot lawfully be excluded. Subject to applicable law, कृति The Creation is not responsible for losses caused by incorrect customer information, third-party service outages, or events outside reasonable control. Product-specific remedies and cancellations are described in the Refund policy.</p>
       <h2>Contact and complaints</h2>
       <p>For order questions or complaints, contact {CONTACT_EMAIL}. The business owner must publish the legal seller name, full address, grievance officer, response process, and final governing-law and jurisdiction wording before launch.</p>
     </PolicyShell>
@@ -91,7 +91,7 @@ function CookiePolicy() {
 function RefundPolicy() {
   return (
     <PolicyShell title="A fair way to make it right." eyebrow="Refund & cancellation policy">
-      <p>This policy applies to orders placed through Knot &amp; Nest. It is subject to consumer rights that cannot be excluded under applicable law. Because pieces are handmade and may be made to order, please contact us as soon as possible if you need to cancel or report a problem.</p>
+      <p>This policy applies to orders placed through कृति The Creation. It is subject to consumer rights that cannot be excluded under applicable law. Because pieces are handmade and may be made to order, please contact us as soon as possible if you need to cancel or report a problem.</p>
       <h2>Before production or confirmation</h2>
       <p>You may request cancellation by emailing {CONTACT_EMAIL} with your order number. If the order has not been confirmed or production has not started, we will normally cancel it and refund any amount received.</p>
       <h2>Made-to-order and customised pieces</h2>
