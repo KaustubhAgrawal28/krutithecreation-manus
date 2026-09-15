@@ -158,7 +158,7 @@ export default function Home() {
           </a>
 
           <nav className="hidden items-center gap-9 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#625d57] lg:flex">
-            <button type="button" onClick={scrollToCatalogue} className="transition-colors hover:text-[#a45e42]">Shop pieces</button>
+              <button type="button" onClick={scrollToCatalogue} className="transition-colors hover:text-[#a45e42]">SHOP PIECES</button>
             <a href="#story" className="transition-colors hover:text-[#a45e42]">Our story</a>
             <a href="#care" className="transition-colors hover:text-[#a45e42]">Care guide</a>
           </nav>
@@ -180,7 +180,7 @@ export default function Home() {
         {mobileMenuOpen && (
           <nav className="border-t border-[#2c2b28]/10 bg-[#f7f3ed] px-5 py-5 lg:hidden">
             <div className="flex flex-col gap-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#625d57]">
-              <button type="button" onClick={scrollToCatalogue} className="text-left">Shop pieces</button>
+              <button type="button" onClick={scrollToCatalogue} className="text-left">SHOP PIECES</button>
               <a href="#story" onClick={() => setMobileMenuOpen(false)}>Our story</a>
               <a href="#care" onClick={() => setMobileMenuOpen(false)}>Care guide</a>
             </div>
