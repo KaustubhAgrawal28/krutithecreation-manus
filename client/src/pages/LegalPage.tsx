@@ -41,7 +41,7 @@ function PrivacyPolicy() {
       <h2>Who receives it</h2>
       <p>Order data is stored in the site’s database and may be sent to the configured email provider, Resend, to deliver an order confirmation. The business may also use delivery, payment, or WhatsApp services to complete an order. Those services may process information under their own terms and privacy notices. No third-party advertising or social-media embed is intentionally loaded by this site.</p>
       <h2>Analytics and consent</h2>
-      <p>Umami analytics is not loaded unless you choose “Allow analytics” in the cookie banner. If you decline, the site keeps analytics disabled. You can reopen Cookie settings from the footer and change your choice. Essential browser storage used for the cart is not used to build an advertising profile.</p>
+      <p>Umami analytics is not loaded unless you choose “Allow analytics” in the cookie banner. If you decline, the site keeps analytics disabled. To change your choice later, clear this site’s browser storage and revisit the site. Essential browser storage used for the cart is not used to build an advertising profile.</p>
       <h2>Retention and rights</h2>
       <p>We keep information for as long as needed to complete the transaction, provide support, resolve disputes, maintain accounting or tax records, and comply with law. The current implementation does not yet provide an automated deletion request workflow or a published retention schedule. To ask about access, correction, deletion, withdrawal of consent, or a complaint, contact {CONTACT_EMAIL}; the business owner must add a formal grievance contact before launch.</p>
       <h2>Security and children</h2>
@@ -79,7 +79,7 @@ function CookiePolicy() {
       <h2>Essential storage</h2>
       <p>The cart is stored in local browser storage under a site-specific key so your selection remains available after a refresh. This is functional storage, not an advertising cookie. If you clear site data, the cart may be lost.</p>
       <h2>Optional analytics</h2>
-      <p>If you select “Allow analytics”, the site loads the configured Umami analytics script. It may create analytics-related browser storage or process technical usage information according to the configured endpoint’s documentation. If you select “Decline”, the script is not loaded. You can change your choice using “Cookie settings” in the footer.</p>
+      <p>If you select “Allow analytics”, the site loads the configured Umami analytics script. It may create analytics-related browser storage or process technical usage information according to the configured endpoint’s documentation. If you select “Decline”, the script is not loaded. To change your choice later, clear this site’s browser storage and revisit the site.</p>
       <h2>Third-party content</h2>
       <p>The site links to Instagram and WhatsApp but does not intentionally embed their content on the storefront. Opening those services takes you to a third-party site that may use its own cookies and tracking. Google Fonts are requested from Google to render the site typography; the owner should self-host fonts if reducing third-party requests is a priority.</p>
       <h2>Questions</h2>

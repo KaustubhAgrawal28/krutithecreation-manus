@@ -25,32 +25,17 @@ export default function CookieConsent() {
       return null;
     }
   });
-  const [settingsOpen, setSettingsOpen] = useState(false);
-
   useEffect(() => {
     if (choice === "accepted") loadAnalytics();
   }, [choice]);
 
-  useEffect(() => {
-    const openSettings = () => setSettingsOpen(true);
-    window.addEventListener("knot-nest:open-cookie-settings", openSettings);
-    return () => window.removeEventListener("knot-nest:open-cookie-settings", openSettings);
-  }, []);
-
   const saveChoice = (nextChoice: ConsentChoice) => {
     localStorage.setItem(CONSENT_KEY, nextChoice);
     setChoice(nextChoice);
-    setSettingsOpen(false);
     if (nextChoice === "accepted") loadAnalytics();
   };
 
-  if (choice && !settingsOpen) {
-    return (
-      <button type="button" onClick={() => setSettingsOpen(true)} className="fixed bottom-4 left-4 z-[90] rounded-full border border-[#2c2b28]/20 bg-[#f7f3ed] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#514a43] shadow-lg transition-colors hover:bg-[#eadfd2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8d4f38]">
-        Cookie settings
-      </button>
-    );
-  }
+  if (choice) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-[#2c2b28]/15 bg-[#f7f3ed] p-4 shadow-[0_-10px_30px_rgba(44,43,40,0.12)] sm:p-5" role="dialog" aria-modal="false" aria-labelledby="cookie-consent-title">
@@ -66,8 +51,4 @@ export default function CookieConsent() {
       </div>
     </div>
   );
-}
-
-export function openCookieSettings() {
-  window.dispatchEvent(new Event("knot-nest:open-cookie-settings"));
 }
