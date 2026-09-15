@@ -1,9 +1,10 @@
-import type { Express } from "express";
+import type { Express, NextFunction, Request, Response } from "express";
 import { ENV } from "./env";
 
-export function registerStorageProxy(app: Express) {
-  app.get("/manus-storage/*", async (req, res) => {
-    const key = (req.params as Record<string, string>)[0];
+export function registerStorageProxy(app: Express, rateLimit?: (req: Request, res: Response, next: NextFunction) => void) {
+  app.get("/manus-storage/*key", ...(rateLimit ? [rateLimit] : []), async (req, res) => {
+    const rawKey = (req.params as Record<string, string | string[]>).key;
+    const key = Array.isArray(rawKey) ? rawKey.join("/") : rawKey;
     if (!key) {
       res.status(400).send("Missing storage key");
       return;

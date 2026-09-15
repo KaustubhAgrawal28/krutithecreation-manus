@@ -5,10 +5,14 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { enforceRateLimit, requestIdentity } from "./_core/security";
+import { TRPCError } from "@trpc/server";
 import { createOrder } from "./db";
 import { sendOrderConfirmationEmail } from "./email";
 
-const orderItemSchema = z.object({ productId: z.string().min(1), quantity: z.number().int().min(1).max(20) });
+const safeText = (min: number, max: number) =>
+  z.string().trim().min(min).max(max).transform((value) => value.replace(/[\u0000-\u001f\u007f]/g, ""));
+const orderItemSchema = z.object({ productId: z.string().trim().regex(/^[a-z0-9-]+$/i).max(80), quantity: z.number().int().min(1).max(20) });
 
 export const appRouter = router({
   system: systemRouter,
@@ -24,17 +28,21 @@ export const appRouter = router({
   orders: router({
     create: publicProcedure
       .input(z.object({
-        customerName: z.string().trim().min(2).max(120),
-        email: z.string().trim().email(),
-        phone: z.string().trim().min(7).max(40),
-        address: z.string().trim().min(8).max(800),
+        customerName: safeText(2, 120),
+        email: z.string().trim().toLowerCase().email().max(320),
+        phone: safeText(7, 40),
+        address: safeText(8, 800),
         pinCode: z.string().regex(/^\d{6}$/, "Enter a valid 6-digit pin code"),
-        notes: z.string().trim().max(800).optional(),
+        notes: safeText(0, 800).optional(),
         paymentMethod: z.enum(["upi", "whatsapp"]),
         termsAccepted: z.literal(true),
         items: z.array(orderItemSchema).min(1).max(30),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        const limit = enforceRateLimit("orders", requestIdentity(ctx.req), 10, 10 * 60 * 1000);
+        if (!limit.allowed) {
+          throw new TRPCError({ code: "TOO_MANY_REQUESTS", message: "Too many order attempts. Please try again later." });
+        }
         const normalizedItems = input.items.map((item) => {
           const product = findProduct(item.productId);
           if (!product) throw new Error("One of the selected pieces is no longer available");

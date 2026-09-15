@@ -8,6 +8,8 @@ import { registerStorageProxy } from "./storageProxy";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { applySecurityHeaders, blockDebugPathsInProduction, rateLimitMiddleware } from "./security";
+import { validateRuntimeConfiguration } from "./env";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -29,16 +31,20 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  validateRuntimeConfiguration();
   const app = express();
   const server = createServer(app);
-  // Configure body parser with larger size limit for file uploads
-  app.use(express.json({ limit: "50mb" }));
-  app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  registerStorageProxy(app);
-  registerOAuthRoutes(app);
+  app.set("trust proxy", 1);
+  applySecurityHeaders(app);
+  blockDebugPathsInProduction(app);
+  app.use(express.json({ limit: "256kb" }));
+  app.use(express.urlencoded({ limit: "64kb", extended: false }));
+  registerStorageProxy(app, rateLimitMiddleware({ bucket: "storage", limit: 120, windowMs: 60 * 1000 }));
+  registerOAuthRoutes(app, rateLimitMiddleware({ bucket: "oauth", limit: 10, windowMs: 10 * 60 * 1000 }));
   // tRPC API
   app.use(
     "/api/trpc",
+    rateLimitMiddleware({ bucket: "trpc", limit: 120, windowMs: 60 * 1000 }),
     createExpressMiddleware({
       router: appRouter,
       createContext,
