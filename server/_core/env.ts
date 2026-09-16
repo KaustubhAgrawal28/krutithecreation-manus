@@ -16,9 +16,6 @@ export function validateJwtSecret(secret: string) {
 }
 
 export function validateRuntimeConfiguration() {
-  console.log("[DEBUG] JWT_SECRET length:", process.env.JWT_SECRET?.length ?? "undefined");
-  console.log("[DEBUG] JWT_SECRET is set:", !!process.env.JWT_SECRET);
-  
   const requiredInProduction = [
     ["JWT_SECRET", ENV.cookieSecret],
     ["VITE_APP_ID", ENV.appId],
