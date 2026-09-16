@@ -9,6 +9,12 @@ export const ENV = {
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
 };
 
+export function validateJwtSecret(secret: string) {
+  if (secret.length < 32) {
+    throw new Error("JWT_SECRET must be at least 32 characters long");
+  }
+}
+
 export function validateRuntimeConfiguration() {
   console.log("[DEBUG] JWT_SECRET length:", process.env.JWT_SECRET?.length ?? "undefined");
   console.log("[DEBUG] JWT_SECRET is set:", !!process.env.JWT_SECRET);
@@ -19,11 +25,13 @@ export function validateRuntimeConfiguration() {
     ["OAUTH_SERVER_URL", ENV.oAuthServerUrl],
     ["DATABASE_URL", ENV.databaseUrl],
   ] as const;
-  const missing = requiredInProduction.filter(([, value]) => !value).map(([name]) => name);
+  const missing = requiredInProduction
+    .filter(([, value]) => !value)
+    .map(([name]) => name);
   if (ENV.isProduction && missing.length > 0) {
-    throw new Error(`Missing required production configuration: ${missing.join(", ")}`);
+    throw new Error(
+      `Missing required production configuration: ${missing.join(", ")}`
+    );
   }
-  if (ENV.isProduction && ENV.cookieSecret.length < 32) {
-    throw new Error("JWT_SECRET must be at least 32 characters long");
-  }
+  if (ENV.isProduction) validateJwtSecret(ENV.cookieSecret);
 }

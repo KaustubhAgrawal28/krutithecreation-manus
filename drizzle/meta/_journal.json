@@ -29,6 +29,13 @@
       "when": 1789395560592,
       "tag": "0003_past_chronomancer",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1789533346300,
+      "tag": "0004_amazing_magma",
+      "breakpoints": true
     }
   ]
 }

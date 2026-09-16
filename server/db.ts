@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertOrder, InsertUser, orders, users } from "../drizzle/schema";
 import { ENV } from "./_core/env";
@@ -48,13 +48,20 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
   if (!values.lastSignedIn) values.lastSignedIn = new Date();
   if (Object.keys(updateSet).length === 0) updateSet.lastSignedIn = new Date();
-  await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
+  await db
+    .insert(users)
+    .values(values)
+    .onDuplicateKeyUpdate({ set: updateSet });
 }
 
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) return undefined;
-  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+  const result = await db
+    .select()
+    .from(users)
+    .where(eq(users.openId, openId))
+    .limit(1);
   return result.length > 0 ? result[0] : undefined;
 }
 
@@ -63,4 +70,25 @@ export async function createOrder(order: InsertOrder) {
   if (!db) throw new Error("Order service is temporarily unavailable");
   await db.insert(orders).values(order);
   return order.orderNumber;
+}
+
+export async function getOrdersForUser(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Order service is temporarily unavailable");
+
+  return db
+    .select({
+      id: orders.id,
+      orderNumber: orders.orderNumber,
+      items: orders.items,
+      subtotal: orders.subtotal,
+      shipping: orders.shipping,
+      total: orders.total,
+      paymentMethod: orders.paymentMethod,
+      status: orders.status,
+      createdAt: orders.createdAt,
+    })
+    .from(orders)
+    .where(eq(orders.userId, userId))
+    .orderBy(desc(orders.createdAt));
 }
